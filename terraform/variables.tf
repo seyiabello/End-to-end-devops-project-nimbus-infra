@@ -52,3 +52,14 @@ variable "storage_replication_type" {
   type        = string
   default     = "LRS"
 }
+
+variable "subscription_id" {
+  description = "Azure Subscription ID used by Terraform"
+  type        = string
+}
+
+variable "tenant_id" {
+  description = "Azure Tenant ID used by Terraform"
+  type        = string
+}
+
