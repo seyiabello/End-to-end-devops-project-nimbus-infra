@@ -1,134 +1,177 @@
-🌩️ Nimbus Infrastructure – End-to-End Cloud DevOps Project (My Full Build)
-<p align="center"> A complete cloud-native DevOps pipeline that I designed and implemented — from Infrastructure as Code to containerization, Kubernetes deployment, automated CI/CD, and real-time monitoring. </p> <p align="center"> 🔗 <strong>Repository:</strong> <a href="https://github.com/seyiabello/Nimbus-infra">github.com/seyiabello/Nimbus-infra</a> </p>
-🚀 What This Project Is
+# 🌩️ Nimbus Infrastructure  
+## End-to-End Azure DevOps Platform
 
-This project demonstrates my ability to build a full production-grade DevOps environment on Azure using:
+<p align="center">
+  <img src="images/endtoendupdated.PNG" alt="Nimbus End-to-End Architecture" width="900">
+</p>
 
-Terraform
+<p align="center">
+  A production-style Azure DevOps platform demonstrating Infrastructure as Code, containerisation, Kubernetes orchestration, CI/CD automation, security best practices, and observability.
+</p>
 
-Docker
+---
 
-Azure Kubernetes Service (AKS)
+## 🚀 Project Overview
 
-GitHub Actions CI/CD
+Nimbus Infra is a **full end-to-end DevOps build on Microsoft Azure**, designed to mirror how modern cloud platforms are engineered and operated in real environments.
 
-Prometheus & Grafana
+The project covers the complete lifecycle:
+- Infrastructure provisioning with **Terraform**
+- Application containerisation with **Docker**
+- Deployment and scaling on **Azure Kubernetes Service (AKS)**
+- Automated delivery via **GitHub Actions CI/CD**
+- Secure configuration using **Azure Key Vault & RBAC**
+- Monitoring and observability with **Prometheus & Grafana**
 
-It mirrors the real workflows used by Cloud Engineers, DevOps Engineers, and SRE teams.
+This project demonstrates how I design, deploy, automate, and validate cloud-native systems from scratch.
 
-🧱 What I Built — End-to-End Breakdown
-1. Infrastructure with Terraform (IaC)
+---
 
-I wrote a fully modular Terraform codebase to deploy the entire Azure environment.
+## 🧠 High-Level Architecture
 
-✔ Resource Group
-✔ Azure Kubernetes Service (AKS)
-✔ Azure Container Registry (ACR)
-✔ Azure Key Vault
-✔ Storage Account + Blob Container (Terraform Remote State)
-✔ RBAC (AKS → ACR & AKV Access)
+**Flow summary:**
+1. Code is written locally and pushed to GitHub
+2. Terraform provisions Azure infrastructure using a remote backend
+3. GitHub Actions builds and pushes Docker images to Azure Container Registry
+4. AKS pulls images and deploys the application via Kubernetes manifests
+5. Monitoring stack provides cluster and workload visibility
 
-➡️ Terraform folder:
-🔗 <a href="https://github.com/seyiabello/Nimbus-infra/tree/master/terraform">/terraform</a>
+---
 
-Key files inside:
+## 🛠️ Tech Stack
 
-<a href="https://github.com/seyiabello/Nimbus-infra/blob/master/terraform/provider.tf">provider.tf</a>
+**Cloud & Platform**
+- Microsoft Azure (AKS, ACR, Key Vault, Storage)
 
-<a href="https://github.com/seyiabello/Nimbus-infra/blob/master/terraform/AKS.tf">AKS.tf</a>
+**Infrastructure as Code**
+- Terraform (modular configuration, remote state)
 
-<a href="https://github.com/seyiabello/Nimbus-infra/blob/master/terraform/ACR.tf">ACR.tf</a>
+**Containers & Orchestration**
+- Docker
+- Kubernetes (AKS)
 
-<a href="https://github.com/seyiabello/Nimbus-infra/blob/master/terraform/Keyvault.tf">Keyvault.tf</a>
+**CI/CD**
+- GitHub Actions
 
-<a href="https://github.com/seyiabello/Nimbus-infra/blob/master/terraform/storage.tf">storage.tf</a>
+**Observability**
+- Prometheus
+- Grafana
 
-<a href="https://github.com/seyiabello/Nimbus-infra/blob/master/terraform/rbac.tf">rbac.tf</a>
+---
 
-<a href="https://github.com/seyiabello/Nimbus-infra/blob/master/terraform/backend.tf">backend.tf</a>
+## 🔁 Automated CI/CD Pipeline
 
-<a href="https://github.com/seyiabello/Nimbus-infra/blob/master/terraform/variables.tf">variables.tf</a>
+<p align="center">
+  <img src="images/buildanddeploy.png" alt="GitHub Actions CI/CD Pipeline" width="850">
+</p>
 
-<a href="https://github.com/seyiabello/Nimbus-infra/blob/master/terraform/output.tf">output.tf</a>
+**Pipeline capabilities:**
+- Azure authentication via service principal
+- Docker image build
+- Push to Azure Container Registry
+- Automatic rollout of new image to AKS
 
-2. Containerization with Docker
+This ensures **every commit can trigger a reproducible deployment**.
 
-I dockerized the Nimbus application by writing a production-ready Dockerfile and pushing images to ACR.
+---
 
-➡️ Key files:
+## 🧱 Infrastructure as Code (Terraform)
 
-<a href="https://github.com/seyiabello/Nimbus-infra/blob/master/dockerfile">dockerfile</a>
+<p align="center">
+  <img src="images/Containers.png" alt="Terraform Remote State Storage Account" width="850">
+</p>
 
-<a href="https://github.com/seyiabello/Nimbus-infra/blob/master/.dockerignore">.dockerignore</a>
+Terraform provisions:
+- Resource Group
+- Azure Kubernetes Service (AKS)
+- Azure Container Registry (ACR)
+- Azure Key Vault
+- Storage Account + Blob container for **remote state**
+- Role-Based Access Control (RBAC)
 
-Application source:
+Remote state is securely stored in Azure Blob Storage, enabling safe collaboration and state consistency.
 
-<a href="https://github.com/seyiabello/Nimbus-infra/blob/master/app.js">app.js</a>
+---
 
-<a href="https://github.com/seyiabello/Nimbus-infra/tree/master/nimbus-site">/nimbus-site (HTML, CSS, NGINX config)</a>
+## ☸️ Kubernetes Deployment (AKS)
 
-3. Kubernetes Deployment to AKS
+<p align="center">
+  <img src="images/kubernetes1.png" alt="Kubernetes Pod and Service Validation" width="850">
+</p>
 
-I wrote Kubernetes manifests to deploy and expose the application on AKS.
+Kubernetes manifests define:
+- Application Deployment
+- LoadBalancer Service
 
-➡️ Kubernetes folder:
-🔗 <a href="https://github.com/seyiabello/Nimbus-infra/tree/master/k8s">/k8s</a>
+The screenshot confirms:
+- Image pulled successfully from ACR
+- Container started without errors
+- External LoadBalancer IP assigned
 
-Files:
+---
 
-<a href="https://github.com/seyiabello/Nimbus-infra/blob/master/k8s/deployment.yaml">deployment.yaml</a>
+## ☁️ Azure Platform Proof
 
-<a href="https://github.com/seyiabello/Nimbus-infra/blob/master/k8s/service.yaml">service.yaml</a>
+<p align="center">
+  <img src="images/nimbus-rg.png" alt="Azure Resource Group Overview" width="850">
+</p>
 
-4. Automated CI/CD Pipeline (GitHub Actions)
+All platform components are deployed into a single Azure Resource Group, providing:
+- Clear ownership
+- Consistent lifecycle management
+- Easy teardown and recreation
 
-I built a full pipeline that automates:
+---
 
-Docker build
+## 🌐 Deployed Application
 
-ACR push
+<p align="center">
+  <img src="images/site.png" alt="Nimbus Web Application" width="850">
+</p>
 
-AKS deployment
+The Nimbus site is served via Kubernetes and exposed through an Azure LoadBalancer, demonstrating a complete **infra → app → user** flow.
 
-Workflow file:
-🔗 <a href="https://github.com/seyiabello/Nimbus-infra/blob/master/.github/workflows/build.yaml">.github/workflows/build.yaml</a>
+---
 
-5. Monitoring with Prometheus & Grafana
+## 📊 Monitoring & Observability
 
-I deployed Prometheus and Grafana into AKS for real-time monitoring.
+<p align="center">
+  <img src="images/welcometografana.png" alt="Grafana Monitoring Interface" width="850">
+</p>
 
-➡️ Monitoring folder:
-🔗 <a href="https://github.com/seyiabello/Nimbus-infra/tree/master/monitoring">/monitoring</a>
+Prometheus and Grafana are deployed into the AKS cluster to provide:
+- Cluster-level metrics
+- Application observability
+- Foundation for alerting and performance analysis
 
-Setup script:
+---
 
-<a href="https://github.com/seyiabello/Nimbus-infra/blob/master/monitoring/setup-monitoring.sh">setup-monitoring.sh</a>
+## 📁 Repository Structure
 
-📂 Repository Structure
+```text
 NIMBUS-INFRA
-│
-├── .github/workflows/
-│   └── build.yaml
-│
+├── .github/
+│   └── workflows/
+│       └── build.yaml
+├── images/
+│   ├── buildanddeploy.png
+│   ├── Containers.png
+│   ├── endtoendupdated.PNG
+│   ├── kubernetes1.png
+│   ├── nimbus-rg.png
+│   ├── site.png
+│   └── welcometografana.png
 ├── k8s/
 │   ├── deployment.yaml
 │   └── service.yaml
-│
 ├── monitoring/
 │   └── setup-monitoring.sh
-│
 ├── nimbus-site/
 │   ├── index.html
 │   ├── styles.css
 │   └── nginx.conf
-│
-├── app.js
-├── dockerfile
-├── .dockerignore
-│
 ├── terraform/
-│   ├── *.tf (AKS, ACR, Key Vault, Storage, RBAC, Variables, Backend)
-│
+│   └── *.tf
 └── README.md
 
 🔧 How to Deploy Everything
